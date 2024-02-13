@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Corona Virus Death Report</title>
+    <!-- Include Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Canvas element where the chart will be rendered -->
+    <canvas id="myChart" width="800" height="400"></canvas> <!-- Increase canvas width -->
+    
+    <script th:inline="javascript">
+        var countries = /*[[${countries}]]*/ [];
+        var deathCounts = /*[[${deathCounts}]]*/ [];
+
+        var ctx = document.getElementById('myChart').getContext('2d');
+
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: countries,
+                datasets: [{
+                    label: 'Death Report Counts',
+                    data: deathCounts,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        ticks: {
+                            autoSkip: false,
+                            maxRotation: 80,
+                            minRotation: 80,
+                            fontSize: 1 // Decrease font size for better readability
+                        }
+                    },
+                    y: {
+                        min: 200000,
+                        max: 1000000,
+                        ticks: {
+                            stepSize: 200000
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
